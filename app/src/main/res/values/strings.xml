@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Admitly</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or">OR</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="wechat">WeChat</string>
+    <string name="google">Google</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="username">Username</string>
+    <string name="you_are_a">You are a</string>
+    <string name="my_information">My Information</string>
+    <string name="country">Country</string>
+    <string name="enter">Enter</string>
+    <string name="school">School</string>
+    <string name="year">Year</string>
+    <string name="major">Major</string>
+    <string name="gpa">GPA</string>
+    <string name="test">Test</string>
+    <string name="test_name">Test Name</string>
+    <string name="score">Score</string>
+    <string name="add_more_test">Add more test</string>
+    <string name="dream_school">Dream School</string>
+    <string name="add_more_dream_school">Add more dream school</string>
+    <string name="post_project">Post Project</string>
+    <string name="i_need_services">I Need Services</string>
+    <string name="post_my_project">Post My Project</string>
+    <string name="school_major_matching">School/Major Matching</string>
+    <string name="essay_editing">Essay Editing</string>
+</resources>
