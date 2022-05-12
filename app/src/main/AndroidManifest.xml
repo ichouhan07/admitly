@@ -12,22 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Admitly">
         <activity
-            android:name=".ui.activity.CounselorSignupActivity"
+            android:name=".ui.counselor.CounselorSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".studentScreens.studentActivities.PostProjectActivity"
+            android:name=".ui.student.PostProjectActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StudentInfoActivity"
+            android:name=".ui.student.StudentInfoActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.comman.ChooseActivity"
             android:exported="false" />
         <activity
-            android:name=".ChooseActivity"
+            android:name=".ui.comman.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.comman.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.comman.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

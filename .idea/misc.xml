@@ -5,9 +5,13 @@
       <map>
         <entry key="../../Android/Sdk/platforms/android-32/data/res/layout-car/car_alert_dialog_button_bar.xml" value="0.15897435897435896" />
         <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/test_list_item.xml" value="0.15897435897435896" />
+        <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/drawable/edit_input_radius.xml" value="0.36153846153846153" />
+        <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/activity_choose.xml" value="0.35104166666666664" />
         <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/activity_counselor_signup.xml" value="0.35104166666666664" />
+        <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/activity_post_project.xml" value="0.35104166666666664" />
         <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/activity_sign_in.xml" value="0.35104166666666664" />
         <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/activity_student_info.xml" value="0.35104166666666664" />
+        <entry key="..\:/AndroidProjects/admitly-android/app/src/main/res/layout/view_drop_down_menu.xml" value="0.35104166666666664" />
         <entry key="app/src/main/res/drawable/button_radius.xml" value="0.128" />
         <entry key="app/src/main/res/drawable/edit_input_radius.xml" value="0.128" />
         <entry key="app/src/main/res/drawable/google_btn_radius.xml" value="0.128" />

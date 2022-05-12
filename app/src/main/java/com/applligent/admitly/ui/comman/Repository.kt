@@ -1,4 +1,4 @@
-package com.applligent.admitly
+package com.applligent.admitly.ui.comman
 
 import com.applligent.admitly.network.ApiInterface
 

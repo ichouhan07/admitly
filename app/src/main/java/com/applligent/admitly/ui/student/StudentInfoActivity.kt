@@ -1,20 +1,24 @@
-package com.applligent.admitly.ui.activity
+package com.applligent.admitly.ui.student
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.applligent.admitly.Repository
+import com.applligent.admitly.ui.comman.Repository
+import com.applligent.admitly.adapter.CountrySpinnerAdapter
 import com.applligent.admitly.databinding.ActivityStudentInfoBinding
 import com.applligent.admitly.databinding.TestLayoutItemsBinding
+import com.applligent.admitly.model.CountryModel
 import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
-import com.applligent.admitly.studentScreens.studentActivities.PostProjectActivity
-import com.applligent.admitly.ui.viewmodel.SignupViewModel
-import com.applligent.admitly.ui.viewmodel.SignupViewModelFactory
+import com.applligent.admitly.viewmodel.SignupViewModel
+import com.applligent.admitly.viewmodel.SignupViewModelFactory
 import com.applligent.admitly.utils.Comman
 import com.google.gson.Gson
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.ArrayList
 import java.util.HashMap
@@ -26,7 +30,10 @@ class StudentInfoActivity : AppCompatActivity() {
     private lateinit var userName:String
     private lateinit var userEmail:String
     private lateinit var password:String
+    private var countryId: Int = 0
     lateinit var signupViewModel: SignupViewModel
+    var countrySpinnerAdapter: CountrySpinnerAdapter? = null
+    private lateinit var countryList: ArrayList<CountryModel?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +53,32 @@ class StudentInfoActivity : AppCompatActivity() {
             )
         ).get(SignupViewModel::class.java)
 
+        countryList = ArrayList<CountryModel?>()
 
         setListener()
         setObserVer()
+        signupViewModel.getAllCountry()
 
     }
 
     private fun setListener(){
+
+        binding.countrySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    countryId = countryList[position]?.id!!
+                    System.out.println("MY_COUNTRY "+countryId)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
+            }
+
 
         binding.continueBtn.setOnClickListener {
 
@@ -79,8 +105,8 @@ class StudentInfoActivity : AppCompatActivity() {
                 signupMap.put("userType",1)
                 signupMap.put("password",password)
                 signupMap.put("deviceType","A")
-                signupMap.put("deviceToken","...")
-                signupMap.put("countryId",156)
+                signupMap.put("deviceToken","")
+                signupMap.put("countryId",countryId)
                 signupMap.put("school",binding.schoolEt.text.toString())
                 signupMap.put("year",binding.yearEt.text.toString())
                 signupMap.put("major",binding.majorEt.text.toString())
@@ -136,6 +162,41 @@ class StudentInfoActivity : AppCompatActivity() {
                     is ApiCallback.Loading -> {
                         if(!response.isLoading){
                             System.out.println("SIGNUP_RESPONSE_IS Loading false ")
+                        }
+                    }
+                }
+            })
+
+        signupViewModel.countryCallback.observe(this,
+            { response ->
+                when (response) {
+                    is ApiCallback.Success -> {
+                        val res = Gson().toJson(response.data)
+                        val mainObject = JSONObject(res)
+                        System.out.println("COUNTRY success "+mainObject.toString())
+                        if(mainObject.getBoolean("success")){
+                            try {
+                                val jsonArray = mainObject.getJSONArray("data");
+                                for (i in 0..jsonArray.length()-1) {
+                                    val jsonObject = jsonArray.getJSONObject(i)
+                                    val countryModel = CountryModel(jsonObject.getInt("id"),jsonObject.getString("name"),jsonObject.getString("iso3"))
+                                    countryList.add(countryModel)
+                                }
+                                countrySpinnerAdapter = CountrySpinnerAdapter(this@StudentInfoActivity, countryList)
+                                binding.countrySpinner.adapter = countrySpinnerAdapter
+                            }catch (e:JSONException){
+                                e.printStackTrace()
+                            }
+                        }else{
+                            Comman.showLongToast(this,mainObject.getString("message"))
+                        }
+                    }
+                    is ApiCallback.Error -> {
+                        System.out.println("COUNTRY error "+response.error)
+                    }
+                    is ApiCallback.Loading -> {
+                        if(!response.isLoading){
+                            System.out.println("COUNTRY Loading false ")
                         }
                     }
                 }

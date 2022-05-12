@@ -1,16 +1,15 @@
-package com.applligent.admitly.ui.viewmodel
+package com.applligent.admitly.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.applligent.admitly.Repository
-import com.applligent.admitly.SignInViewModel
+import com.applligent.admitly.ui.comman.Repository
 import com.applligent.admitly.network.ApiCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(val repository:Repository) : ViewModel() {
+class LoginViewModel(val repository: Repository) : ViewModel() {
 
     val loginCallback = MutableLiveData<ApiCallback>()
 

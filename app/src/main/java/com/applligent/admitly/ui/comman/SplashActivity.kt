@@ -1,10 +1,11 @@
-package com.applligent.admitly
+package com.applligent.admitly.ui.comman
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.applligent.admitly.R
 
 class SplashActivity : AppCompatActivity() {
 

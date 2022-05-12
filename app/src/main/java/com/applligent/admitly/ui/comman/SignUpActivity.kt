@@ -1,47 +1,48 @@
-package com.applligent.admitly
+package com.applligent.admitly.ui.comman
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.applligent.admitly.databinding.ActivitySignUpBinding
-import com.applligent.admitly.network.ApiCallback
-import com.applligent.admitly.network.ApiClient
-import com.applligent.admitly.network.ApiInterface
-import com.applligent.admitly.ui.activity.StudentInfoActivity
-import com.applligent.admitly.ui.viewmodel.SignupViewModel
-import com.applligent.admitly.ui.viewmodel.SignupViewModelFactory
-import com.applligent.admitly.utils.Comman
-import com.google.gson.Gson
-import org.json.JSONObject
-import java.util.ArrayList
-import java.util.HashMap
+import com.applligent.admitly.ui.counselor.CounselorSignupActivity
+import com.applligent.admitly.ui.student.StudentInfoActivity
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignUpBinding
+    private var userType: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userType = intent.getIntExtra("user_type",1)
         setListeners()
 
     }
     private fun setListeners(){
         binding.alreadyHaveAccount.setOnClickListener {
-            val i = Intent(this,SignInActivity::class.java)
+            val i = Intent(this, SignInActivity::class.java)
             startActivity(i)
         }
         binding.signUpBtn.setOnClickListener {
             if (isValidSignUpDetails() == true){
-                val intent = Intent(this,StudentInfoActivity::class.java)
-                intent.putExtra("user_name",binding.userNameSignUp.text.toString())
-                intent.putExtra("user_email",binding.emailSignUp.text.toString())
-                intent.putExtra("password",binding.passwordSignUp.text.toString())
-                startActivity(intent)
+                if(userType == 1){
+                    val intent = Intent(this, StudentInfoActivity::class.java)
+                    intent.putExtra("user_name",binding.userNameSignUp.text.toString())
+                    intent.putExtra("user_email",binding.emailSignUp.text.toString())
+                    intent.putExtra("password",binding.passwordSignUp.text.toString())
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this, CounselorSignupActivity::class.java)
+                    intent.putExtra("user_name",binding.userNameSignUp.text.toString())
+                    intent.putExtra("user_email",binding.emailSignUp.text.toString())
+                    intent.putExtra("password",binding.passwordSignUp.text.toString())
+                    startActivity(intent)
+                }
+
             }
 
         }

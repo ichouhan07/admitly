@@ -1,9 +1,10 @@
-package com.applligent.admitly
+package com.applligent.admitly.ui.comman
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.applligent.admitly.R
 import com.applligent.admitly.databinding.ActivityChooseBinding
 
 class ChooseActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class ChooseActivity : AppCompatActivity() {
             }, (secondsDelayed * 1000).toLong())*/
         }
         binding.continueBtn.setOnClickListener {
-            val intent = Intent(this,SignInActivity::class.java)
+            val intent = Intent(this, SignInActivity::class.java)
             intent.putExtra("user_type",userType)
             startActivity(intent)
             /*if (isValidSignUpDetails() == true){

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activity.StudentInfoActivity">
+    tools:context=".ui.student.StudentInfoActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,18 +37,26 @@
                     android:textColor="@color/black"
                     app:layout_constraintTop_toBottomOf="@id/info1"
                     app:layout_constraintStart_toStartOf="parent" />
-                <EditText
-                    android:id="@+id/info_country"
-                    style="@style/InformationEditTextStyle"
+<!--                <EditText-->
+<!--                    android:id="@+id/info_country"-->
+<!--                    style="@style/InformationEditTextStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/dp_45"-->
+<!--                    android:layout_marginTop="@dimen/dp_10"-->
+<!--                    android:background="@drawable/edit_input_radius"-->
+<!--                    android:hint="@string/enter"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/c1"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    />-->
+
+                <Spinner
+                    android:id="@+id/country_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/edit_input_radius"
-                    android:hint="@string/enter"
                     app:layout_constraintTop_toBottomOf="@id/c1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"/>
                 <TextView
                     android:id="@+id/s1"
                     android:layout_width="wrap_content"
@@ -59,7 +67,7 @@
                     android:text="@string/school"
                     android:textSize="@dimen/sp_18"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/info_country"
+                    app:layout_constraintTop_toBottomOf="@id/country_spinner"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
                     android:id="@+id/school_et"

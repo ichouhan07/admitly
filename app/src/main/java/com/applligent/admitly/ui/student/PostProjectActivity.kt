@@ -1,4 +1,4 @@
-package com.applligent.admitly.studentScreens.studentActivities
+package com.applligent.admitly.ui.student
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.applligent.admitly
+package com.applligent.admitly.ui.comman
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,9 @@ import com.applligent.admitly.databinding.ActivitySignInBinding
 import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
-import com.applligent.admitly.ui.activity.StudentInfoActivity
-import com.applligent.admitly.ui.viewmodel.LoginViewModel
-import com.applligent.admitly.ui.viewmodel.LoginViewModelFactory
+import com.applligent.admitly.ui.student.StudentInfoActivity
+import com.applligent.admitly.viewmodel.LoginViewModel
+import com.applligent.admitly.viewmodel.LoginViewModelFactory
 import com.applligent.admitly.utils.Comman
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -52,11 +52,11 @@ class SignInActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.dontHaveAccount.setOnClickListener {
             val i = Intent(this, SignUpActivity::class.java)
+            i.putExtra("user_type",userType)
             startActivity(i)
         }
         binding.signInBtn.setOnClickListener {
             if (isValidSignUpDetails() == true) {
-                System.out.println("MY_USER_TYPE "+  userType)
                 //startActivity(Intent(this, StudentInfoActivity::class.java))
                 val loginMap = HashMap<String, Any>()
                 loginMap.put("email",binding.emailSignIn.text.toString().trim())
