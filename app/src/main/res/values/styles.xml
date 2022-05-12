@@ -19,4 +19,12 @@
         <item name="android:layout_marginHorizontal">@dimen/dp_30</item>
 
     </style>
+
+<!--    <style name="CustomDialog" parent="android:Theme.DeviceDefault.Dialog">-->
+<!--        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>-->
+<!--        <item name="DialogTitleText">Please Wait...</item>-->
+<!--        <item name="DialogSpotColor">@android:color/white</item>-->
+<!--        <item name="DialogSpotCount">8</item>-->
+<!--    </style>-->
+
 </resources>

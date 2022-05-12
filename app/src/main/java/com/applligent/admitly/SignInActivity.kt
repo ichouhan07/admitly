@@ -3,55 +3,119 @@ package com.applligent.admitly
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.applligent.admitly.databinding.ActivitySignInBinding
-import com.applligent.admitly.studentScreens.studentActivities.StudentInfoActivity
-import retrofit2.create
+import com.applligent.admitly.network.ApiCallback
+import com.applligent.admitly.network.ApiClient
+import com.applligent.admitly.network.ApiInterface
+import com.applligent.admitly.ui.activity.StudentInfoActivity
+import com.applligent.admitly.ui.viewmodel.LoginViewModel
+import com.applligent.admitly.ui.viewmodel.LoginViewModelFactory
+import com.applligent.admitly.utils.Comman
+import com.google.gson.Gson
+import org.json.JSONObject
+import java.util.HashMap
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
     //var signInViewModel: SignInViewModel? = null
 
+    lateinit var loginViewModel: LoginViewModel
+    private var userType: Int = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userType = intent.getIntExtra("user_type",1)
+
+
+        loginViewModel = ViewModelProvider(
+            this,
+            LoginViewModelFactory(
+                Repository(
+                    ApiClient().getClient()!!.create(ApiInterface::class.java)
+                )
+            )
+        ).get(LoginViewModel::class.java)
+
+
         setListeners()
+        setObserVer()
         /*signInViewModel = ViewModelProvider(this, SignInViewModelFactory(Repository(ApiInterface.getInstance(this).create()))).get(SignInViewModel::class.java)
         signInViewModel!!.getAllCountries()*/
     }
-    private fun setListeners(){
+
+    private fun setListeners() {
         binding.dontHaveAccount.setOnClickListener {
-            val i = Intent(this,SignUpActivity::class.java)
+            val i = Intent(this, SignUpActivity::class.java)
             startActivity(i)
         }
         binding.signInBtn.setOnClickListener {
-            if (isValidSignUpDetails() == true){
-                startActivity(Intent(this, StudentInfoActivity::class.java))
+            if (isValidSignUpDetails() == true) {
+                System.out.println("MY_USER_TYPE "+  userType)
+                //startActivity(Intent(this, StudentInfoActivity::class.java))
+                val loginMap = HashMap<String, Any>()
+                loginMap.put("email",binding.emailSignIn.text.toString().trim())
+                loginMap.put("password",binding.passwordSignIn.text.toString().trim())
+                loginMap.put("loginType",1)
+                loginViewModel.userLogin(loginMap)
             }
         }
     }
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    fun setObserVer() {
+        loginViewModel.loginCallback.observe(this,
+            { response ->
+                when (response) {
+                    is ApiCallback.Success -> {
+                        val res = Gson().toJson(response.data)
+                        val mainObject = JSONObject(res)
+                       // System.out.println("LOGIN_RESPONSE_IS "+mainObject.toString())
+                        if(mainObject.getBoolean("success")){
+                            Comman.showLongToast(this,"Login Success")
+                            // TODO need to save login data
+                            startActivity(Intent(this, StudentInfoActivity::class.java))
+                        }else{
+                            Comman.showLongToast(this,mainObject.getString("message"))
+                        }
+                    }
+                    is ApiCallback.Error -> {
+                        System.out.println("MY_DATA_IS Error "+  response.error)
+                    }
+                    is ApiCallback.Loading -> {
+                        if(!response.isLoading){
+                            System.out.println("MY_DATA_IS Loading false ")
+                        }
+                    }
+                }
+            })
     }
+
+
     private fun isValidSignUpDetails(): Boolean? {
         return if (binding.emailSignIn.text.toString().trim().isEmpty()) {
-            showToast("Please enter email")
+            binding.emailSignIn.requestFocus()
+            binding.emailSignIn.setError("Please enter email address!")
             false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailSignIn.text.toString())
                 .matches()
         ) {
-            showToast("Please enter valid email")
+            binding.emailSignIn.requestFocus()
+            binding.emailSignIn.setError("Please enter valid email!")
             false
         } else if (binding.passwordSignIn.text.toString().trim().isEmpty()) {
-            showToast("Please enter password")
+            binding.passwordSignIn.requestFocus()
+            binding.passwordSignIn.setError("Please enter password!")
             false
-        } /*else if (binding.passwordSignIn.text.toString() > 7.toString()) {
-            showToast("Please enter 7 digit password")
+        }  else if(binding.passwordSignIn.text.toString().length < 6){
+            binding.passwordSignIn.requestFocus()
+            binding.passwordSignIn.setError("Password must be 6 digits!")
             false
-        }*/ else {
+        } else{
             true
         }
     }

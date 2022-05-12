@@ -10,7 +10,8 @@ import retrofit2.Response
 
 
 class SignInViewModel (private val repository: Repository) : ViewModel() {
-  /* val countryList = MutableLiveData<List<Country>>()
+
+   val countryList = MutableLiveData<List<Country>>()
     val errorMessage = MutableLiveData<String>()
 
     fun getAllCountries(){
@@ -23,7 +24,9 @@ class SignInViewModel (private val repository: Repository) : ViewModel() {
 
             }
         })
-    }*/
+    }
+
+
 }
 class SignInViewModelFactory constructor(private val repository: Repository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

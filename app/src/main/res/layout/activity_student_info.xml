@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".studentScreens.studentActivities.StudentInfoActivity">
+    tools:context=".ui.activity.StudentInfoActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -62,7 +62,7 @@
                     app:layout_constraintTop_toBottomOf="@id/info_country"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/info_school"
+                    android:id="@+id/school_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
@@ -83,10 +83,10 @@
                     android:text="@string/year"
                     android:textSize="@dimen/sp_18"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/info_school"
+                    app:layout_constraintTop_toBottomOf="@id/school_et"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/info_year"
+                    android:id="@+id/year_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
@@ -107,10 +107,10 @@
                     android:text="@string/major"
                     android:textSize="@dimen/sp_18"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/info_year"
+                    app:layout_constraintTop_toBottomOf="@id/year_et"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/info_major"
+                    android:id="@+id/major_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
@@ -131,10 +131,10 @@
                     android:text="@string/gpa"
                     android:textSize="@dimen/sp_18"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/info_major"
+                    app:layout_constraintTop_toBottomOf="@id/major_et"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/info_gpa"
+                    android:id="@+id/gpa_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
@@ -155,7 +155,7 @@
                     android:text="@string/test"
                     android:textSize="@dimen/sp_18"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/info_gpa"
+                    app:layout_constraintTop_toBottomOf="@id/gpa_et"
                     app:layout_constraintStart_toStartOf="parent"/>
                 <LinearLayout
                     android:id="@+id/testEmptyLayout"
@@ -227,7 +227,7 @@
                         android:textColor="@color/black"/>
                 </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/continueInfoBtn"
+                    android:id="@+id/continueBtn"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
                     android:layout_marginTop="41dp"

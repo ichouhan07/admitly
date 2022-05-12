@@ -2,16 +2,13 @@ package com.applligent.admitly
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.applligent.admitly.databinding.ActivityChooseBinding
-import com.applligent.admitly.studentScreens.studentActivities.StudentInfoActivity
 
 class ChooseActivity : AppCompatActivity() {
     lateinit var binding: ActivityChooseBinding
+    var userType:Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +22,12 @@ class ChooseActivity : AppCompatActivity() {
         binding.chooseStudent.setOnClickListener {
             binding.chooseStudent.setImageResource(R.drawable.choose_stu)
             binding.chooseCounselor.setImageResource(R.drawable.not_choose_coun)
+            userType = 1
         }
         binding.chooseCounselor.setOnClickListener {
             binding.chooseCounselor.setImageResource(R.drawable.choose_coun)
             binding.chooseStudent.setImageResource(R.drawable.not_choose_stu)
+            userType = 2
             /*val secondsDelayed = 1
             Handler(Looper.getMainLooper()).postDelayed({
                 startActivity(Intent(this, SignUpActivity::class.java))
@@ -36,8 +35,9 @@ class ChooseActivity : AppCompatActivity() {
             }, (secondsDelayed * 1000).toLong())*/
         }
         binding.continueBtn.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
+            val intent = Intent(this,SignInActivity::class.java)
+            intent.putExtra("user_type",userType)
+            startActivity(intent)
             /*if (isValidSignUpDetails() == true){
                 startActivity(Intent(this, SignUpActivity::class.java))
                 finish()
