@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/exploreFragment">
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.applligent.admitly.ui.counselor.counselorfragments.ConExploreFragment"
+        android:label="fragment_con_explore"
+        tools:layout="@layout/fragment_con_explore" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.applligent.admitly.ui.counselor.counselorfragments.ConProjectFragment"
+        android:label="fragment_con_project"
+        tools:layout="@layout/fragment_con_project" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.applligent.admitly.ui.counselor.counselorfragments.ConMessageFragment"
+        android:label="fragment_con_message"
+        tools:layout="@layout/fragment_con_message" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.applligent.admitly.ui.counselor.counselorfragments.ConProfileFragment"
+        android:label="fragment_con_profile"
+        tools:layout="@layout/fragment_con_profile" />
+</navigation>

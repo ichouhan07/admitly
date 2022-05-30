@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.student.studentfragments.StuMessageFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/RL_chatSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:padding="@dimen/dp_20"
+            >
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/message"
+                android:fontFamily="@font/inter"
+                android:textSize="@dimen/sp_22"
+                android:textColor="@color/white"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_message"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/searchbar_bg"
+                >
+                <ImageView
+                    android:id="@+id/search_ic"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/dp_18"
+                    android:src="@drawable/search_ic"
+                    android:layout_marginVertical="@dimen/dp_14"
+                    android:layout_marginStart="@dimen/dp_14"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:layout_toEndOf="@id/search_ic"
+                    android:background="@null"
+                    android:hint="@string/search"
+                    android:padding="@dimen/dp_12"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatList_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RL_chatSearchBar"
+            />
+
+    </RelativeLayout>
+</layout>

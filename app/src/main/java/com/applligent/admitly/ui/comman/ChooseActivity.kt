@@ -18,8 +18,6 @@ class ChooseActivity : AppCompatActivity() {
         setListeners()
     }
     private fun setListeners(){
-        binding.back.setOnClickListener { onBackPressed() }
-
         binding.chooseStudent.setOnClickListener {
             binding.chooseStudent.setImageResource(R.drawable.choose_stu)
             binding.chooseCounselor.setImageResource(R.drawable.not_choose_coun)
@@ -29,14 +27,10 @@ class ChooseActivity : AppCompatActivity() {
             binding.chooseCounselor.setImageResource(R.drawable.choose_coun)
             binding.chooseStudent.setImageResource(R.drawable.not_choose_stu)
             userType = 2
-            /*val secondsDelayed = 1
-            Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this, SignUpActivity::class.java))
-                finish()
-            }, (secondsDelayed * 1000).toLong())*/
+
         }
         binding.continueBtn.setOnClickListener {
-            val intent = Intent(this, SignInActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             intent.putExtra("user_type",userType)
             startActivity(intent)
             /*if (isValidSignUpDetails() == true){

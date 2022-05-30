@@ -13,4 +13,14 @@
     <color name="medium_spring_green">#00DF66</color>
     <color name="grey74">#BDBDBD</color>
     <color name="grey95">#F2F2F9</color>
+    <color name="dark_charcoal">#333333</color>
+    <color name="ocean_buble">#89B0CC</color>
+    <color name="calypso">#35678B</color>
+    <color name="dark_moderate_blue">#43758C</color>
+    <color name="old_lace">#FEF7EA</color>
+    <color name="mandarin_orange">#FFA356</color>
+    <color name="light_red">#FF5468</color>
+    <color name="light_green">#E8F9E6</color>
+    <color name="light_green2">#60D151</color>
+    <color name="alice_blue">#ECF9FF</color>
 </resources>

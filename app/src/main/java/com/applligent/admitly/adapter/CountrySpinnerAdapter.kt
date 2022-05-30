@@ -42,7 +42,6 @@ class CountrySpinnerAdapter (val context: Context, var countryList: ArrayList<Co
     }
 
     override fun getCount(): Int {
-//        print("list_size" + countryList.size )
         return countryList.size
 
     }

@@ -23,6 +23,7 @@ class SignUpActivity : AppCompatActivity() {
 
     }
     private fun setListeners(){
+        binding.backBtn.setOnClickListener { onBackPressed() }
         binding.alreadyHaveAccount.setOnClickListener {
             val i = Intent(this, SignInActivity::class.java)
             startActivity(i)
@@ -34,12 +35,16 @@ class SignUpActivity : AppCompatActivity() {
                     intent.putExtra("user_name",binding.userNameSignUp.text.toString())
                     intent.putExtra("user_email",binding.emailSignUp.text.toString())
                     intent.putExtra("password",binding.passwordSignUp.text.toString())
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }else{
                     val intent = Intent(this, CounselorSignupActivity::class.java)
                     intent.putExtra("user_name",binding.userNameSignUp.text.toString())
                     intent.putExtra("user_email",binding.emailSignUp.text.toString())
                     intent.putExtra("password",binding.passwordSignUp.text.toString())
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
 
@@ -48,10 +53,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
     private fun isValidSignUpDetails(): Boolean {
         return if (binding.userNameSignUp.text.toString().isEmpty()) {
             binding.userNameSignUp.requestFocus()

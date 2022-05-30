@@ -7,9 +7,10 @@
     tools:context=".ui.comman.SplashActivity">
 
     <ImageView
-        android:layout_width="@dimen/dp_160"
-        android:layout_height="@dimen/dp_160"
-        android:src="@drawable/admitly_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/splash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

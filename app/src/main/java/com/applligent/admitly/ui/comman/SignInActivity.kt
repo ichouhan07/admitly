@@ -1,5 +1,5 @@
 package com.applligent.admitly.ui.comman
-
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -9,20 +9,44 @@ import com.applligent.admitly.databinding.ActivitySignInBinding
 import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
+import com.applligent.admitly.ui.counselor.CounselorDashboardActivity
+import com.applligent.admitly.ui.counselor.CounselorSignupActivity
+import com.applligent.admitly.ui.counselor.MyServiceActivity
+import com.applligent.admitly.ui.student.PostProjectActivity
+import com.applligent.admitly.ui.student.StudentDashboardActivity
 import com.applligent.admitly.ui.student.StudentInfoActivity
+import com.applligent.admitly.utils.Comman
+import com.applligent.admitly.utils.log
+import com.applligent.admitly.utils.preferences.*
+import com.applligent.admitly.utils.toast
 import com.applligent.admitly.viewmodel.LoginViewModel
 import com.applligent.admitly.viewmodel.LoginViewModelFactory
-import com.applligent.admitly.utils.Comman
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import org.json.JSONObject
-import java.util.HashMap
+
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
     //var signInViewModel: SignInViewModel? = null
 
     lateinit var loginViewModel: LoginViewModel
-    private var userType: Int = 0
+    private lateinit var progressDialog: ProgressDialog
+
+    private var userType: Int = 2
+
+    //Login with google
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 100
+
+    //for msg
+    lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +54,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userType = intent.getIntExtra("user_type",1)
-
+        auth = FirebaseAuth.getInstance()
 
         loginViewModel = ViewModelProvider(
             this,
@@ -43,80 +66,178 @@ class SignInActivity : AppCompatActivity() {
         ).get(LoginViewModel::class.java)
 
 
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Loading...")
+        progressDialog.setMessage("Please wait")
+
         setListeners()
-        setObserVer()
+        setObserver()
+        //Login with google
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+       // Check for existing Google Sign In account, if the user is already signed in
+       // the GoogleSignInAccount will be non-null.
+       val account = GoogleSignIn.getLastSignedInAccount(this)
+
+
         /*signInViewModel = ViewModelProvider(this, SignInViewModelFactory(Repository(ApiInterface.getInstance(this).create()))).get(SignInViewModel::class.java)
         signInViewModel!!.getAllCountries()*/
     }
 
     private fun setListeners() {
         binding.dontHaveAccount.setOnClickListener {
-            val i = Intent(this, SignUpActivity::class.java)
-            i.putExtra("user_type",userType)
+            val i = Intent(this, ChooseActivity::class.java)
             startActivity(i)
         }
         binding.signInBtn.setOnClickListener {
             if (isValidSignUpDetails() == true) {
-                //startActivity(Intent(this, StudentInfoActivity::class.java))
+                progressDialog.show()
                 val loginMap = HashMap<String, Any>()
                 loginMap.put("email",binding.emailSignIn.text.toString().trim())
                 loginMap.put("password",binding.passwordSignIn.text.toString().trim())
                 loginMap.put("loginType",1)
                 loginViewModel.userLogin(loginMap)
+                val signInEmail = binding.emailSignIn.toString().trim()
+                val signInPass = "123456"
+                auth.signInWithEmailAndPassword(signInEmail,signInPass).addOnCompleteListener {task->
+                    if (task.isSuccessful)
+                    {
+                        //toast("User Found")
+                    }
+                    else
+                    {
+                        //toast("User Not Found")
+                    }
+                }
             }
+        }
+        binding.forgotPassword.setOnClickListener {
+            startActivity(Intent(this,ForgotPasswordActivity::class.java))
+        }
+        binding.googleSignInBtn.setOnClickListener {
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent,RC_SIGN_IN)
         }
     }
 
-    fun setObserVer() {
-        loginViewModel.loginCallback.observe(this,
-            { response ->
-                when (response) {
-                    is ApiCallback.Success -> {
-                        val res = Gson().toJson(response.data)
-                        val mainObject = JSONObject(res)
-                       // System.out.println("LOGIN_RESPONSE_IS "+mainObject.toString())
-                        if(mainObject.getBoolean("success")){
-                            Comman.showLongToast(this,"Login Success")
-                            // TODO need to save login data
-                            startActivity(Intent(this, StudentInfoActivity::class.java))
+    fun setObserver() {
+        loginViewModel.loginCallback.observe(this
+        ) { response ->
+            when (response) {
+                is ApiCallback.Success -> {
+                    progressDialog.dismiss()
+                    val res = Gson().toJson(response.data)
+                    val mainObject = JSONObject(res)
+                    if (mainObject.getBoolean("success")) {
+                        val data = mainObject.getJSONObject("data")
+                        setUserId(data.getInt("userId"))
+                        setToken(data.getString("token"))
+                        setLoginStatus(true)
+                        setUserType(data.getInt("userType"))
+                        setAccountType(data.getInt("accountType"))
+                        Comman.showLongToast(this, "Login Success")
+                        // TODO need to save login data
+                        if(mainObject.getJSONObject("data").getInt("userType") == 1){
+                            val intent = Intent(this, StudentDashboardActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            finish()
                         }else{
-                            Comman.showLongToast(this,mainObject.getString("message"))
+                            val intent = Intent(this, CounselorDashboardActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            finish()
                         }
-                    }
-                    is ApiCallback.Error -> {
-                        System.out.println("MY_DATA_IS Error "+  response.error)
-                    }
-                    is ApiCallback.Loading -> {
-                        if(!response.isLoading){
-                            System.out.println("MY_DATA_IS Loading false ")
-                        }
+                    } else {
+                        Comman.showLongToast(this, mainObject.getString("message"))
                     }
                 }
-            })
+                is ApiCallback.Error -> {
+                    progressDialog.dismiss()
+                    Comman.showLongToast(this, response.error.toString())
+                }
+                is ApiCallback.Loading -> {
+                    if (!response.isLoading) {
+                      0
+                    }
+                }
+            }
+        }
     }
 
 
     private fun isValidSignUpDetails(): Boolean? {
         return if (binding.emailSignIn.text.toString().trim().isEmpty()) {
             binding.emailSignIn.requestFocus()
-            binding.emailSignIn.setError("Please enter email address!")
+            binding.emailSignIn.error = "Enter email address!"
             false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailSignIn.text.toString())
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailSignIn.text.toString().trim())
                 .matches()
         ) {
             binding.emailSignIn.requestFocus()
-            binding.emailSignIn.setError("Please enter valid email!")
+            binding.emailSignIn.error = "Enter valid email!"
             false
         } else if (binding.passwordSignIn.text.toString().trim().isEmpty()) {
             binding.passwordSignIn.requestFocus()
-            binding.passwordSignIn.setError("Please enter password!")
+            binding.passwordSignIn.error = "Enter password!"
             false
         }  else if(binding.passwordSignIn.text.toString().length < 6){
             binding.passwordSignIn.requestFocus()
-            binding.passwordSignIn.setError("Password must be 6 digits!")
+            binding.passwordSignIn.error = "Password must be 6 digits!"
             false
         } else{
             true
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
+            if (acct != null) {
+                var personName = acct.displayName
+                var personGivenName = acct.givenName
+                var personFamilyName = acct.familyName
+                var personEmail = acct.email
+                var personId = acct.id
+                var personPhoto = acct.photoUrl
+
+                progressDialog.show()
+                val loginMap = HashMap<String, Any>()
+                loginMap["socialId"] = personId.toString().trim()
+                loginMap["name"] = personName.toString()
+                loginMap["email"] = personEmail.toString().trim()
+                loginMap["loginType"] = 2
+                loginMap["profileUrl"] = "Url"
+                loginMap["socialType"] = "Google"
+                loginMap["deviceType"] = "A"
+                loginMap["deviceToken"] = "----"
+                loginMap["userType"] = userType
+
+                loginViewModel.userLogin(loginMap)
+            }
+
+            // Signed in successfully, show authenticated UI.
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            log("fuguf"+ e.statusCode)
         }
     }
 }

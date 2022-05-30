@@ -6,7 +6,10 @@
     tools:context=".ui.student.PostProjectActivity">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        android:background="@color/grey95">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -18,131 +21,182 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_34"
+                    android:layout_marginStart="@dimen/dp_30"
                     android:fontFamily="@font/inter"
                     android:text="@string/post_project"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_21"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
                 <TextView
-                    android:id="@+id/c1"
+                    android:id="@+id/con1"
+                    style="@style/HeadingTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_61"
-                    android:layout_marginStart="@dimen/dp_30"
-                    android:fontFamily="@font/inter"
+                    android:layout_marginTop="@dimen/dp_30"
                     android:text="@string/country"
-                    android:textSize="@dimen/sp_18"
-                    android:textColor="@color/black"
                     app:layout_constraintTop_toBottomOf="@id/info1"
                     app:layout_constraintStart_toStartOf="parent" />
-                <EditText
-                    android:id="@+id/project_country"
-                    style="@style/InformationEditTextStyle"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cons1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/edit_input_radius"
-                    android:hint="@string/enter"
-                    app:layout_constraintTop_toBottomOf="@id/c1"
+                    android:layout_marginTop="@dimen/dp_15"
+                    app:layout_constraintTop_toBottomOf="@id/con1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <TextView
+                        android:id="@+id/project_country_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_45"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/ocean_buble"
+                        android:fontFamily="@font/inter"
+                        android:padding="@dimen/sp_10"
+                        android:background="@drawable/edit_input_radius"
+                        android:layout_marginHorizontal="@dimen/dp_30"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                    <Spinner
+                        android:id="@+id/country_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_45"
+                        android:layout_marginHorizontal="@dimen/dp_30"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                     android:id="@+id/y1"
+                    style="@style/HeadingTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_13"
-                    android:layout_marginStart="@dimen/dp_30"
-                    android:fontFamily="@font/inter"
                     android:text="@string/year"
-                    android:textSize="@dimen/sp_18"
-                    android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/project_country"
+                    app:layout_constraintTop_toBottomOf="@id/cons1"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/project_year"
+                    android:id="@+id/project_year_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/edit_input_radius"
-                    android:hint="@string/enter"
+                    android:hint="@string/yyyy"
+                    android:inputType="number"
+                    android:maxLength="4"
                     app:layout_constraintTop_toBottomOf="@id/y1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
                 <TextView
-                    android:id="@+id/m1"
+                    android:id="@+id/mj1"
+                    style="@style/HeadingTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_13"
-                    android:layout_marginStart="@dimen/dp_30"
-                    android:fontFamily="@font/inter"
                     android:text="@string/major"
-                    android:textSize="@dimen/sp_18"
-                    android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/project_year"
+                    app:layout_constraintTop_toBottomOf="@id/project_year_et"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/project_major"
+                    android:id="@+id/project_major_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/edit_input_radius"
-                    android:hint="@string/enter"
-                    app:layout_constraintTop_toBottomOf="@id/m1"
+                    android:hint="@string/major"
+                    app:layout_constraintTop_toBottomOf="@id/mj1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
+                <!--<androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cons2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:layout_marginTop="@dimen/dp_15"
+                    app:layout_constraintTop_toBottomOf="@id/mj1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <EditText
+                        android:id="@+id/project_major_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_45"
+                        android:hint="@string/major"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/ocean_buble"
+                        android:fontFamily="@font/inter"
+                        android:padding="@dimen/sp_10"
+                        android:background="@drawable/edit_input_radius"
+                        android:layout_marginHorizontal="@dimen/dp_30"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                    <ImageView
+                        android:layout_width="@dimen/dp_14"
+                        android:layout_height="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_50"
+                        android:src="@drawable/select_up_arrow"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
                 <TextView
                     android:id="@+id/ds1"
+                    style="@style/HeadingTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_13"
-                    android:layout_marginStart="@dimen/dp_30"
-                    android:fontFamily="@font/inter"
                     android:text="@string/dream_school"
-                    android:textSize="@dimen/sp_18"
-                    android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/project_major"
+                    app:layout_constraintTop_toBottomOf="@id/project_major_et"
                     app:layout_constraintStart_toStartOf="parent" />
                 <EditText
-                    android:id="@+id/project_dream_school"
+                    android:id="@+id/project_dream_school_et"
                     style="@style/InformationEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/edit_input_radius"
-                    android:hint="@string/enter"
+                    android:hint="@string/dream_school"
                     app:layout_constraintTop_toBottomOf="@id/ds1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
                 <LinearLayout
-                    android:id="@+id/ln2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/testEmptyLayout1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:layout_marginStart="@dimen/dp_30"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/project_dream_school"
+                    android:layout_marginHorizontal="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/project_dream_school_et"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+                <RelativeLayout
+                    android:id="@+id/add_more_dream_school"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:layout_marginTop="@dimen/dp_25"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp_30"
+                    android:background="@drawable/add_more_radius"
+                    app:layout_constraintTop_toBottomOf="@id/testEmptyLayout1"
                     app:layout_constraintStart_toStartOf="parent">
-                    <ImageView
-                        android:layout_width="@dimen/dp_24"
-                        android:layout_height="@dimen/dp_24"
-                        android:src="@drawable/add_test"/>
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:fontFamily="@font/inter"
-                        android:text="@string/add_more_dream_school"
-                        android:textSize="@dimen/sp_18"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+                        android:layout_height="@dimen/dp_45"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="@dimen/dp_24"
+                            android:layout_height="@dimen/dp_24"
+                            android:src="@drawable/add_more_btn"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:fontFamily="@font/inter"
+                            android:text="@string/add_more_dream_school"
+                            android:textSize="@dimen/sp_18"
+                            android:textColor="@color/green"/>
+                    </LinearLayout>
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/tv"
                     android:layout_width="wrap_content"
@@ -151,8 +205,9 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/i_need_services"
                     android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/ln2"
+                    app:layout_constraintTop_toBottomOf="@id/add_more_dream_school"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
@@ -160,7 +215,7 @@
                     android:id="@+id/ln3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_25"
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:weightSum="2"
@@ -169,29 +224,25 @@
                     app:layout_constraintEnd_toEndOf="parent">
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_height="190dp"
                         android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/smMatchingBox"
-                            android:layout_width="@dimen/dp_100"
-                            android:layout_height="@dimen/dp_100"
-                            app:cardCornerRadius="@dimen/dp_10">
-                            <ImageView
-                                android:id="@+id/smMatching"
-                                android:layout_width="@dimen/dp_50"
-                                android:layout_height="@dimen/dp_50"
-                                android:layout_gravity="center"
-                                android:src="@drawable/s_m_matching" />
-                        </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/smMatching"
+                            android:layout_width="@dimen/dp_140"
+                            android:layout_height="@dimen/dp_140"
+                            android:layout_gravity="center"
+                            android:src="@drawable/s_m_matching" />
                         <TextView
+                            android:id="@+id/textSM"
                             android:layout_width="@dimen/dp_100"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/inter"
                             android:text="@string/school_major_matching"
                             android:textSize="@dimen/sp_16"
-                            android:textColor="@color/black"
+                            android:textColor="@color/ocean_buble"
                             />
                     </LinearLayout>
                     <View
@@ -199,49 +250,42 @@
                         android:layout_height="match_parent"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_height="190dp"
                         android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/easyEditingBox"
-                            android:layout_width="@dimen/dp_100"
-                            android:layout_height="@dimen/dp_100"
-                            app:cardCornerRadius="@dimen/dp_10">
-                            <ImageView
-                                android:id="@+id/easyEditing"
-                                android:layout_width="@dimen/dp_50"
-                                android:layout_height="@dimen/dp_50"
-                                android:layout_gravity="center"
-                                android:src="@drawable/easy_editing" />
-
-                        </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/easyEditing"
+                            android:layout_width="@dimen/dp_140"
+                            android:layout_height="@dimen/dp_140"
+                            android:layout_gravity="center"
+                            android:src="@drawable/easy_editing" />
                         <TextView
+                            android:id="@+id/textEE"
                             android:layout_width="@dimen/dp_100"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
                             android:fontFamily="@font/inter"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/essay_editing"
                             android:textSize="@dimen/sp_16"
-                            android:textColor="@color/black"
+                            android:textColor="@color/ocean_buble"
                             />
                     </LinearLayout>
                 </LinearLayout>
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/postMyProject"
+                    style="@style/ButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_45"
                     android:layout_marginTop="41dp"
-                    android:layout_marginHorizontal="@dimen/dp_30"
-                    android:fontFamily="@font/inter"
-                    android:background="@drawable/signin_btn_radius"
-                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/dp_20"
                     android:text="@string/post_my_project"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_18"
-                    app:layout_constraintTop_toBottomOf="@id/ln3"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ln3"
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

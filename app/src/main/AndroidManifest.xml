@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.applligent.admitly">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,6 +13,63 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Admitly">
         <activity
+            android:name=".ui.student.ReviewCounselorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.student.AddPaymentMethodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.student.StuPaymentMethodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".chatSystem.ChatScreenActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.counselor.AddBankAccountActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.counselor.ConPaymentMethodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.counselor.ProposalToStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.counselor.CounselorDashboardActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.student.HireCounselorProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.student.StudentDashboardActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.comman.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.counselor.MyServiceActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.comman.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.counselor.CounselorSignupActivity"
             android:exported="false" />
         <activity
@@ -19,14 +77,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.student.StudentInfoActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".ui.comman.ChooseActivity"
             android:exported="false" />
@@ -35,13 +86,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.comman.SignUpActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ui.comman.SplashActivity"
             android:exported="true">

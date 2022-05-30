@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialogue_box_radius">
+
+        <RelativeLayout
+            android:id="@+id/vw1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/dismiss_btn"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:src="@drawable/dismiss_btn" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_30"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/search_counselor"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_21"
+                    android:textStyle="bold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_46"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/dialogue_edittext_radius">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_43"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:background="@drawable/edit_input_radius"
+                        android:fontFamily="@font/inter"
+                        android:padding="@dimen/sp_10"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/ocean_buble"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/country_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_43"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_46"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/dialogue_edittext_radius">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_43"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:background="@drawable/edit_input_radius"
+                        android:fontFamily="@font/inter"
+                        android:padding="@dimen/sp_10"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/ocean_buble"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/service_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_43"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/et_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_46"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/dialogue_edittext_radius"
+                    android:fontFamily="@font/inter"
+                    android:hint="@string/experience"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/dp_12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/ocean_buble"
+                    android:textSize="@dimen/sp_16" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/apply_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_40"
+                    android:background="@drawable/signin_btn_radius"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/apply"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

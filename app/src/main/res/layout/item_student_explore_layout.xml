@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_20">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_profile_img"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:id="@+id/tv_counselor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_toEndOf="@id/iv_profile_img"
+                    android:text="Jane Cooper"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18" />
+                <TextView
+                    android:id="@+id/tv_counselor_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:text="Poland"
+                    android:layout_below="@id/tv_counselor_name"
+                    android:layout_toEndOf="@id/iv_profile_img"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/ocean_buble"
+                    />
+                <TextView
+                    android:id="@+id/tv_ratings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:text="0.5"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    />
+                <ImageView
+                    android:id="@+id/star_logo"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="18dp"
+                    android:src="@drawable/rating_star"
+                    android:layout_toStartOf="@id/tv_ratings"
+                    android:layout_marginEnd="@dimen/dp_8"
+                    />
+
+                <ImageView
+                    android:id="@+id/experience_logo"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/dp_18"
+                    android:layout_below="@id/iv_profile_img"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:src="@drawable/experience_logo" />
+                <TextView
+                    android:id="@+id/tv_experience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:text="4 years"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/ocean_buble"
+                    android:layout_toEndOf="@id/experience_logo"
+                    android:layout_below="@id/iv_profile_img"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginStart="@dimen/dp_8"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/hire_Btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_below="@id/iv_profile_img"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:background="@drawable/signin_btn_radius"
+                    android:text="Hire"
+                    android:textColor="@color/white" />
+                <ImageView
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_40"
+                    android:src="@drawable/message_icon"
+                    android:layout_toStartOf="@id/hire_Btn"
+                    android:layout_below="@id/iv_profile_img"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

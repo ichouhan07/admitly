@@ -6,6 +6,13 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.applligent.admitly.R
+import com.applligent.admitly.ui.counselor.CounselorDashboardActivity
+import com.applligent.admitly.ui.counselor.CounselorSignupActivity
+import com.applligent.admitly.ui.student.StudentDashboardActivity
+import com.applligent.admitly.ui.student.StudentInfoActivity
+import com.applligent.admitly.utils.preferences.getAccountType
+import com.applligent.admitly.utils.preferences.getLoginStatus
+import com.applligent.admitly.utils.preferences.getUserType
 
 class SplashActivity : AppCompatActivity() {
 
@@ -14,9 +21,25 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val i = Intent(this@SplashActivity, ChooseActivity::class.java)
-            startActivity(i)
-            finish()
-        }, 1000)
+            //var iNext: Intent
+            if (getLoginStatus()) {
+                if (getUserType() == 1 && getAccountType() == 1 ){
+                    startActivity(Intent(this@SplashActivity, StudentDashboardActivity::class.java))
+                    finish()
+                }else if (getUserType() == 1 && getAccountType() == 2){
+                    startActivity(Intent(this@SplashActivity, StudentInfoActivity::class.java))
+                    finish()
+                }else if (getUserType() == 2 && getAccountType() == 1 ){
+                    startActivity(Intent(this@SplashActivity, CounselorDashboardActivity::class.java))
+                    finish()
+                }else if (getUserType() == 2 && getAccountType() == 2 ){
+                    startActivity(Intent(this@SplashActivity, CounselorSignupActivity::class.java))
+                    finish()
+                }
+            } else {
+                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
+                finish()
+            }
+        }, 3000)
     }
 }

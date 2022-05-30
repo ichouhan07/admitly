@@ -6,6 +6,73 @@
     tools:context=".ui.comman.ChooseActivity">
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey95">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/whoAreYou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_200"
+                    android:textSize="@dimen/sp_24"
+                    android:text="@string/who_are_you"
+                    android:textColor="@color/dark_charcoal"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/inter"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+                <LinearLayout
+                    android:id="@+id/l1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_160"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/whoAreYou"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <ImageView
+                        android:id="@+id/choose_student"
+                        android:layout_width="@dimen/dp_160"
+                        android:layout_height="@dimen/dp_160"
+                        android:src="@drawable/choose_stu"
+                        />
+                    <ImageView
+                        android:id="@+id/choose_counselor"
+                        android:layout_width="@dimen/dp_160"
+                        android:layout_height="@dimen/dp_160"
+                        android:src="@drawable/not_choose_coun" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/continueBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:layout_marginHorizontal="@dimen/dp_30"
+                    android:fontFamily="@font/inter"
+                    android:background="@drawable/signin_btn_radius"
+                    android:textAllCaps="false"
+                    android:text="Continue"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    app:layout_constraintTop_toBottomOf="@id/l1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!--<ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -13,25 +80,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/back"
-                    android:layout_width="@dimen/dp_18"
-                    android:layout_height="@dimen/dp_18"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_40"
-                    android:src="@drawable/back_btn"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+
                 <TextView
                     android:id="@+id/signIn_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_71"
                     android:textSize="@dimen/sp_24"
-                    android:text="@string/you_are_a"
                     android:textColor="@color/green"
                     android:fontFamily="@font/inter"
-                    app:layout_constraintTop_toBottomOf="@id/back"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
@@ -71,5 +129,5 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 </layout>

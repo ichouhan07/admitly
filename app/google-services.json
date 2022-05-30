@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "902944298062",
+    "firebase_url": "https://admilty-default-rtdb.firebaseio.com",
+    "project_id": "admilty",
+    "storage_bucket": "admilty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902944298062:android:2a05414e72c27e131ddf1f",
+        "android_client_info": {
+          "package_name": "com.applligent.admitly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902944298062-20ksitrkmrrt80qv53522tlnpv4fu4tu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.applligent.admitly",
+            "certificate_hash": "b67189dd06f289f7516692ac248d0852cb1af946"
+          }
+        },
+        {
+          "client_id": "902944298062-g4vu179nfclv5q2lhegal9la8321r13u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDggqzJSg5cdsKy0ResSyiawWA9UfvoapQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902944298062-g4vu179nfclv5q2lhegal9la8321r13u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "902944298062-dqmjm2a6mbcovvk2d9i4bk5c7q7hoe8s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.applligent.Admitly"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

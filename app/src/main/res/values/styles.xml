@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="RegistrationEditTextStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/black</item>
-        <item name="fontFamily">@font/inter</item>
+        <item name="android:textColorHint">@color/ocean_buble</item>
+        <item name="android:fontFamily">@font/inter</item>
         <item name="android:padding">@dimen/sp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_15</item>
+        <item name="android:background">@drawable/edit_input_radius</item>
         <item name="android:layout_marginHorizontal">@dimen/dp_30</item>
 
     </style>
@@ -13,18 +15,31 @@
     <style name="InformationEditTextStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/grey74</item>
-        <item name="fontFamily">@font/inter</item>
-        <item name="android:padding">@dimen/sp_10</item>
+        <item name="android:textColorHint">@color/ocean_buble</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:padding">@dimen/dp_12</item>
+        <item name="android:layout_marginTop">@dimen/dp_15</item>
+        <item name="android:background">@drawable/edit_input_radius</item>
         <item name="android:layout_marginHorizontal">@dimen/dp_30</item>
 
     </style>
+    <style name="HeadingTextViewStyle" parent="Theme.Design.Light.NoActionBar">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/calypso</item>
+        <item name="android:layout_marginTop">@dimen/dp_15</item>
+        <item name="android:layout_marginStart">@dimen/sp_33</item>
+    </style>
 
-<!--    <style name="CustomDialog" parent="android:Theme.DeviceDefault.Dialog">-->
-<!--        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>-->
-<!--        <item name="DialogTitleText">Please Wait...</item>-->
-<!--        <item name="DialogSpotColor">@android:color/white</item>-->
-<!--        <item name="DialogSpotCount">8</item>-->
-<!--    </style>-->
-
+    <style name="ButtonStyle" parent="Theme.Design.Light.NoActionBar">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/signin_btn_radius</item>
+        <item name="android:layout_marginHorizontal">@dimen/dp_30</item>
+    </style>
+    <style name="NoBackgroundDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
+    </style>
 </resources>
