@@ -72,25 +72,22 @@ class StuProjectFragment : Fragment() {
     }
 
     private fun setListener() {
+        //for testing token
+        val token1: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIiwiZW1haWwiOiJ0ZXN0MTExQHRlc3QuY29tIiwidXNlclR5cGUiOiIxIn0.vDqOR7KLdO1bIcBKMVIPiUzttW0dejYsYzickWPd6do"
         binding.filter.setOnClickListener {
             val dialogFilterProject = DialogFilterProject(requireActivity())
             dialogFilterProject.show()
             dialogFilterProject.applyFilterOnCurrentProject = {
-                //for testing token
-                val token1: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIiwiZW1haWwiOiJ0ZXN0MTExQHRlc3QuY29tIiwidXNlclR5cGUiOiIxIn0.vDqOR7KLdO1bIcBKMVIPiUzttW0dejYsYzickWPd6do"
                 val projectMap = HashMap<String, Any>()
                 projectMap["status"] = 1
                 sdbViewModel.getStudentProject(projectMap,token1)
             }
             dialogFilterProject.applyFilterOnPastProject = {
-                val token1: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIiwiZW1haWwiOiJ0ZXN0MTExQHRlc3QuY29tIiwidXNlclR5cGUiOiIxIn0.vDqOR7KLdO1bIcBKMVIPiUzttW0dejYsYzickWPd6do"
                 val projectMap = HashMap<String, Any>()
                 projectMap["status"] = 2
                 sdbViewModel.getStudentProject(projectMap,token1)
             }
         }
-
-        val token1: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIiwiZW1haWwiOiJ0ZXN0MTExQHRlc3QuY29tIiwidXNlclR5cGUiOiIxIn0.vDqOR7KLdO1bIcBKMVIPiUzttW0dejYsYzickWPd6do"
         val projectMap = HashMap<String, Any>()
         projectMap["status"] = 0
         sdbViewModel.getStudentProject(projectMap,token1)
@@ -104,11 +101,10 @@ class StuProjectFragment : Fragment() {
                     id: Long
                 ) {
                     serviceId = serviceList[position]?.serviceId!!
-                    val token2: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIiwiZW1haWwiOiJ0ZXN0MTExQHRlc3QuY29tIiwidXNlclR5cGUiOiIxIn0.vDqOR7KLdO1bIcBKMVIPiUzttW0dejYsYzickWPd6do"
                     val proposalMap = HashMap<String, Any>()
                     proposalMap["serviceId"] = serviceId
                     //log("bjbju" +proposalMap)
-                    sdbViewModel.getStudentProposal(proposalMap,token2)
+                    sdbViewModel.getStudentProposal(proposalMap,token1)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {

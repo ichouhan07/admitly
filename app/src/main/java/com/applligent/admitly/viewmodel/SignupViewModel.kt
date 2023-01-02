@@ -13,6 +13,7 @@ class SignupViewModel(val repository: Repository): ViewModel() {
 
     val signupCallback = MutableLiveData<ApiCallback>()
     val countryCallback = MutableLiveData<ApiCallback>()
+    val profilePicCallback = MutableLiveData<ApiCallback>()
 
     fun userSignup(map:HashMap<String,Any>){
         signupCallback.value = ApiCallback.Loading(true)
@@ -50,6 +51,25 @@ class SignupViewModel(val repository: Repository): ViewModel() {
                 ApiCallback.Loading(false)
                 countryCallback.value = ApiCallback.Loading(false)
                 countryCallback.value = ApiCallback.Error(t.message.toString())
+            }
+        })
+    }
+    fun getProfilePic(map:HashMap<String,Any>,token: String){
+        profilePicCallback.value = ApiCallback.Loading(true)
+        val response = repository.userProfilePicture(map,token)
+        response.enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                profilePicCallback.value = ApiCallback.Loading(false)
+                if (response.body()!=null){
+                    profilePicCallback.value = ApiCallback.Success(response.body()!!)
+                }else{
+                    profilePicCallback.value = ApiCallback.Error(response.toString())
+                }
+            }
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                ApiCallback.Loading(false)
+                profilePicCallback.value = ApiCallback.Loading(false)
+                profilePicCallback.value = ApiCallback.Error(t.message.toString())
             }
         })
     }

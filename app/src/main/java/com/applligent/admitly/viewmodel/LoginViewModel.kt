@@ -28,8 +28,6 @@ class LoginViewModel(val repository: Repository) : ViewModel() {
                 loginCallback.value = ApiCallback.Error(t.message.toString())
             }
         })
-
-
     }
 
 }

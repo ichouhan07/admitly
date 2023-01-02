@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applligent.admitly.databinding.ItemCounselorProposalLayoutBinding
-import com.applligent.admitly.model.CounselorExploreModel
 import com.applligent.admitly.model.CounselorProposalModel
 
 class CounselorProposalAdapter(private var proposalList: ArrayList<CounselorProposalModel>): RecyclerView.Adapter<CounselorProposalAdapter.MyViewHolder>() {

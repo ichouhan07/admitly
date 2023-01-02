@@ -91,8 +91,6 @@ class ProposalToStudentActivity : AppCompatActivity() {
                 proposeMap["price"] = binding.priceAmountEt.text.toString().trim()
                 proposeMap["coverLetter"] = binding.coverLetterEt.text.toString().trim()
                 //log("gjgfjd"+proposeMap)
-                binding.priceAmountEt.text.clear()
-                binding.coverLetterEt.text.clear()
                 cdbViewModel.getStudentProposal(proposeMap,token)
             }
         }
@@ -120,8 +118,10 @@ class ProposalToStudentActivity : AppCompatActivity() {
                     val mainObject = JSONObject(res)
                     if (mainObject.getBoolean("success")) {
                         toast(mainObject.getString("message"))
+                        binding.priceAmountEt.text.clear()
+                        binding.coverLetterEt.text.clear()
                     } else {
-                        Comman.showLongToast(this, mainObject.getString("message"))
+                        toast(mainObject.getString("message"))
                     }
                 }
                 is ApiCallback.Error -> {

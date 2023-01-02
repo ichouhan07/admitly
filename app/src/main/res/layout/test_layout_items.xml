@@ -16,7 +16,7 @@
             app:layout_constraintEnd_toEndOf="parent">
             <EditText
                 android:id="@+id/row_major_et"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_45"
                 android:layout_weight="8"
                 android:fontFamily="@font/inter"
@@ -29,7 +29,7 @@
                 />
             <EditText
                 android:id="@+id/row_score_et"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_80"
                 android:layout_height="@dimen/dp_45"
                 android:layout_weight="3"
                 android:layout_marginStart="@dimen/dp_10"

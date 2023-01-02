@@ -1,6 +1,7 @@
 package com.applligent.admitly.ui.counselor.counselorfragments
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
 import com.applligent.admitly.ui.comman.Repository
+import com.applligent.admitly.ui.counselor.MyServiceActivity
 import com.applligent.admitly.utils.Comman
 import com.applligent.admitly.utils.log
 import com.applligent.admitly.viewmodel.CounselorDBViewModel
@@ -88,6 +90,11 @@ class ConExploreFragment : Fragment() {
     }
     private fun setListener() {
 
+        binding.ivCreateService.setOnClickListener {
+            val intent = Intent(requireContext(),MyServiceActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.filter.setOnClickListener { showBottomSheetDialog() }
 
         binding.swipeRefreshLayout.setOnRefreshListener(refreshListener);
@@ -115,7 +122,6 @@ class ConExploreFragment : Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
-
 
         bindingLayout.serviceSpinner.adapter = serviceSpinnerAdapter
         bindingLayout.serviceSpinner.onItemSelectedListener =

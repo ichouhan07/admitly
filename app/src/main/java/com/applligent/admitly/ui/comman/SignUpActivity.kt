@@ -56,25 +56,23 @@ class SignUpActivity : AppCompatActivity() {
     private fun isValidSignUpDetails(): Boolean {
         return if (binding.userNameSignUp.text.toString().isEmpty()) {
             binding.userNameSignUp.requestFocus()
-            binding.userNameSignUp.setError("Please enter name!")
+            binding.userNameSignUp.error = "Please enter name!"
             false
         } else if (binding.emailSignUp.text.toString().isEmpty()) {
             binding.emailSignUp.requestFocus()
-            binding.emailSignUp.setError("Please enter email!")
+            binding.emailSignUp.error = "Please enter email!"
             false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailSignUp.text.toString())
-                .matches()
-        ) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailSignUp.text.toString()).matches()) {
             binding.emailSignUp.requestFocus()
-            binding.emailSignUp.setError("Please enter valid email!")
+            binding.emailSignUp.error = "Please enter valid email!"
             false
         } else if (binding.passwordSignUp.text.toString().isEmpty()) {
             binding.passwordSignUp.requestFocus()
-            binding.passwordSignUp.setError("Please enter password!")
+            binding.passwordSignUp.error = "Please enter password!"
             false
         } else if(binding.passwordSignUp.text.toString().length < 6){
             binding.passwordSignUp.requestFocus()
-            binding.passwordSignUp.setError("Password must be 6 digits!")
+            binding.passwordSignUp.error = "Password must be 6 digits!"
             false
         }else{
             true

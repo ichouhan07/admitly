@@ -1,4 +1,5 @@
 package com.applligent.admitly.ui.comman
+
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -10,15 +11,10 @@ import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
 import com.applligent.admitly.ui.counselor.CounselorDashboardActivity
-import com.applligent.admitly.ui.counselor.CounselorSignupActivity
-import com.applligent.admitly.ui.counselor.MyServiceActivity
-import com.applligent.admitly.ui.student.PostProjectActivity
 import com.applligent.admitly.ui.student.StudentDashboardActivity
-import com.applligent.admitly.ui.student.StudentInfoActivity
 import com.applligent.admitly.utils.Comman
 import com.applligent.admitly.utils.log
 import com.applligent.admitly.utils.preferences.*
-import com.applligent.admitly.utils.toast
 import com.applligent.admitly.viewmodel.LoginViewModel
 import com.applligent.admitly.viewmodel.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,11 +30,8 @@ import org.json.JSONObject
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    //var signInViewModel: SignInViewModel? = null
-
-    lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var progressDialog: ProgressDialog
-
     private var userType: Int = 2
 
     //Login with google
@@ -48,14 +41,11 @@ class SignInActivity : AppCompatActivity() {
     //for msg
     lateinit var auth: FirebaseAuth
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         auth = FirebaseAuth.getInstance()
-
         loginViewModel = ViewModelProvider(
             this,
             LoginViewModelFactory(
@@ -64,8 +54,6 @@ class SignInActivity : AppCompatActivity() {
                 )
             )
         ).get(LoginViewModel::class.java)
-
-
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Loading...")
         progressDialog.setMessage("Please wait")
@@ -81,8 +69,6 @@ class SignInActivity : AppCompatActivity() {
        // Check for existing Google Sign In account, if the user is already signed in
        // the GoogleSignInAccount will be non-null.
        val account = GoogleSignIn.getLastSignedInAccount(this)
-
-
         /*signInViewModel = ViewModelProvider(this, SignInViewModelFactory(Repository(ApiInterface.getInstance(this).create()))).get(SignInViewModel::class.java)
         signInViewModel!!.getAllCountries()*/
     }
@@ -93,15 +79,16 @@ class SignInActivity : AppCompatActivity() {
             startActivity(i)
         }
         binding.signInBtn.setOnClickListener {
-            if (isValidSignUpDetails() == true) {
+            if (isValidSignUpDetails()) {
                 progressDialog.show()
                 val loginMap = HashMap<String, Any>()
                 loginMap.put("email",binding.emailSignIn.text.toString().trim())
                 loginMap.put("password",binding.passwordSignIn.text.toString().trim())
                 loginMap.put("loginType",1)
                 loginViewModel.userLogin(loginMap)
+                //for msg
                 val signInEmail = binding.emailSignIn.toString().trim()
-                val signInPass = "123456"
+                val signInPass = binding.passwordSignIn.text.toString().trim()
                 auth.signInWithEmailAndPassword(signInEmail,signInPass).addOnCompleteListener {task->
                     if (task.isSuccessful)
                     {
@@ -124,8 +111,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun setObserver() {
-        loginViewModel.loginCallback.observe(this
-        ) { response ->
+        loginViewModel.loginCallback.observe(this) { response ->
             when (response) {
                 is ApiCallback.Success -> {
                     progressDialog.dismiss()
@@ -170,8 +156,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun isValidSignUpDetails(): Boolean? {
+    private fun isValidSignUpDetails(): Boolean {
         return if (binding.emailSignIn.text.toString().trim().isEmpty()) {
             binding.emailSignIn.requestFocus()
             binding.emailSignIn.error = "Enter email address!"

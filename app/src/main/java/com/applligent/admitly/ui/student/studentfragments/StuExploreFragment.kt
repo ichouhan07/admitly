@@ -87,7 +87,8 @@ class StuExploreFragment : Fragment() {
         sdbViewModel.getExploreCounselor(exploreMap)
     }
     private fun setListener() {
-        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener);
+        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
+
         binding.ivCreateProject.setOnClickListener {
             val intent = Intent(requireContext(), PostProjectActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

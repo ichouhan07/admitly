@@ -38,5 +38,10 @@ class Repository (private val apiInterface: ApiInterface) {
 
     fun studentAddRating(map: HashMap<String, Any>,token:String) = apiInterface.studentAddRating(map,token)
 
+    fun userProfilePicture(map: HashMap<String, Any>,token:String) = apiInterface.userProfilePicture(map,token)
+
+    fun studentAddCard(map: HashMap<String, Any>,token:String) = apiInterface.studentAddCard(map,token)
+
+    fun counsellorAddAccount(map: HashMap<String, Any>,token: String) = apiInterface.counsellorAddAccount(map,token)
 
 }

@@ -20,6 +20,9 @@ const val USER_PROJECTS_API = "user/projects"
 const val COUNSELLOR_PROPOSALS_ALL_API = "counsellor/proposals/all"
 const val STUDENT_PROPOSAL_API = "student/proposal"
 const val STUDENT_ADD_RATING_API = "student/add-rating"
+const val USER_PROFILE_PICTURE_API = "user/profilepicture"
+const val STUDENT_ADD_CARD_API = "student/add-card"
+const val COUNSELLOR_ADD_ACCOUNT_API = "counsellor/add-account"
 
 
 

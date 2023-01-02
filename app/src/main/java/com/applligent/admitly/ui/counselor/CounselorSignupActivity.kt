@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Button
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.applligent.admitly.R
 import com.applligent.admitly.ui.comman.Repository
 import com.applligent.admitly.adapter.CountrySpinnerAdapter
 import com.applligent.admitly.chatSystem.model.Users
@@ -18,7 +15,6 @@ import com.applligent.admitly.model.CountryModel
 import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
-import com.applligent.admitly.ui.student.PostProjectActivity
 import com.applligent.admitly.viewmodel.SignupViewModel
 import com.applligent.admitly.viewmodel.SignupViewModelFactory
 import com.applligent.admitly.utils.Comman
@@ -29,7 +25,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import org.json.JSONException
 import org.json.JSONObject
@@ -134,30 +129,6 @@ class CounselorSignupActivity : AppCompatActivity() {
                 signupMap.put("linkedInUrl",binding.linkedinUrlEt.text.toString().trim())
 
                 signupViewModel.userSignup(signupMap)
-
-                //for msg
-                val pass = "123456"
-                auth.createUserWithEmailAndPassword(userEmail,pass).addOnCompleteListener { task: Task<AuthResult> ->
-                    if (task.isSuccessful){
-
-                        var message = "Hiii"
-                        imageUri = "https://firebasestorage.googleapis.com/v0/b/admilty.appspot.com/o/Ellipse%209.png?alt=media&token=8f5c9209-a9e0-4f17-aa1c-b49b565a7cde"
-                        val refrence: DatabaseReference = database.getReference().child("user").child(userId)
-                        val storageReference: StorageReference = storage.getReference().child("upload").child(userId)
-
-                        val users = Users(userId,userName,userEmail,imageUri,message)
-                        refrence.setValue(users).addOnCompleteListener {
-                            if (it.isSuccessful){
-                                //Toast.makeText(applicationContext, "firebase user created", Toast.LENGTH_SHORT).show()
-                            }else{
-                                //Toast.makeText(applicationContext, "firebase error", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-
-                    }else{
-
-                    }
-                }
             }
 
         }
@@ -180,6 +151,28 @@ class CounselorSignupActivity : AppCompatActivity() {
                         setLoginStatus(true)
                         setUserType(data.getInt("userType"))
                         setAccountType(data.getInt("accountType"))
+                        //for msg
+                        val pass = password
+                        auth.createUserWithEmailAndPassword(userEmail,pass).addOnCompleteListener { task: Task<AuthResult> ->
+                            if (task.isSuccessful){
+                                var message = "Hiii"
+                                imageUri = "https://firebasestorage.googleapis.com/v0/b/admilty.appspot.com/o/Ellipse%209.png?alt=media&token=8f5c9209-a9e0-4f17-aa1c-b49b565a7cde"
+                                val refrence: DatabaseReference = database.reference.child("user").child(userId)
+                                storage.getReference().child("upload").child(userId)
+
+                                val users = Users(userId,userName,userEmail,imageUri,message)
+                                refrence.setValue(users).addOnCompleteListener {
+                                    if (it.isSuccessful){
+                                        //Toast.makeText(applicationContext, "firebase user created", Toast.LENGTH_SHORT).show()
+                                    }else{
+                                        //Toast.makeText(applicationContext, "firebase error", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
+                            }else{
+
+                            }
+                        }
                         // TODO need to save registration data
                         val intent = Intent(this, MyServiceActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

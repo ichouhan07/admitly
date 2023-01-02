@@ -35,8 +35,8 @@ class PostProjectActivity : AppCompatActivity() {
     lateinit var binding: ActivityPostProjectBinding
     var serviceId:Int = 1
     private var countryId: Int = 0
-    lateinit var postProjectViewModel: PostProjectViewModel
-    var countrySpinnerAdapter: CountrySpinnerAdapter? = null
+    private lateinit var postProjectViewModel: PostProjectViewModel
+    private var countrySpinnerAdapter: CountrySpinnerAdapter? = null
     private lateinit var countryList: ArrayList<CountryModel?>
     private lateinit var progressDialog: ProgressDialog
 
@@ -47,7 +47,6 @@ class PostProjectActivity : AppCompatActivity() {
         binding = ActivityPostProjectBinding.inflate(layoutInflater)
         setContentView(binding.root)
         selectButton()
-
         postProjectViewModel = ViewModelProvider(
             this,
             PostProjectViewModelFactory(
@@ -60,16 +59,12 @@ class PostProjectActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Loading...")
         progressDialog.setMessage("Please wait")
-
         setListeners()
         setObserver()
         progressDialog.show()
         postProjectViewModel.getAllCountry()
-
     }
     private fun setListeners(){
-
-
         binding.countrySpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -80,17 +75,14 @@ class PostProjectActivity : AppCompatActivity() {
                 ) {
                     countryId = countryList[position]?.id!!
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
-
         binding.addMoreDreamSchool.setOnClickListener {
             addView()
         }
-
         binding.postMyProject.setOnClickListener {
-            if (isValidProjectDetails() == true){
+            if (isValidProjectDetails()){
                 addProject()
             }
         }
@@ -119,7 +111,7 @@ class PostProjectActivity : AppCompatActivity() {
             serviceId = 2
         }
     }
-    private fun isValidProjectDetails(): Boolean? {
+    private fun isValidProjectDetails(): Boolean {
         return if (binding.projectYearEt.text.toString().trim().isEmpty()) {
             binding.projectYearEt.requestFocus()
             binding.projectYearEt.error = "Enter year!"
@@ -140,7 +132,7 @@ class PostProjectActivity : AppCompatActivity() {
         progressDialog.show()
         val dreamSchoolArray = ArrayList<HashMap<String, Any>>()
         val mainMap = HashMap<String, Any>()
-        mainMap.put("title",binding.projectDreamSchoolEt.text.toString())
+        mainMap["title"] = binding.projectDreamSchoolEt.text.toString()
         dreamSchoolArray.add(mainMap)
 
         for (k in 0 until binding.testEmptyLayout1.childCount) {
@@ -148,7 +140,7 @@ class PostProjectActivity : AppCompatActivity() {
             val sSchoolEt = selectLayout.findViewById<View>(R.id.row_dream_school_et) as EditText
 
             val hashMap = HashMap<String, Any>()
-            hashMap.put("title",sSchoolEt.text.toString())
+            hashMap["title"] = sSchoolEt.text.toString()
             dreamSchoolArray.add(hashMap)
         }
         val addProjectMap = HashMap<String, Any>()
@@ -157,11 +149,9 @@ class PostProjectActivity : AppCompatActivity() {
         addProjectMap["major"] = binding.projectMajorEt.text.toString().trim()
         addProjectMap["dreamSchools"] = dreamSchoolArray
         addProjectMap["serviceId"] = serviceId
-
         postProjectViewModel.addProject(addProjectMap,getToken())
     }
     private fun setObserver() {
-
         postProjectViewModel.projectCallback.observe(this
         ) { response ->
             when (response) {
@@ -191,7 +181,6 @@ class PostProjectActivity : AppCompatActivity() {
                 }
             }
         }
-
         postProjectViewModel.countryCallback.observe(this
         ) { response ->
             when (response) {
@@ -201,8 +190,8 @@ class PostProjectActivity : AppCompatActivity() {
                     val mainObject = JSONObject(res)
                     if (mainObject.getBoolean("success")) {
                         try {
-                            val jsonArray = mainObject.getJSONArray("data");
-                            for (i in 0..jsonArray.length() - 1) {
+                            val jsonArray = mainObject.getJSONArray("data")
+                            for (i in 0 until jsonArray.length()) {
                                 val jsonObject = jsonArray.getJSONObject(i)
                                 val countryModel = CountryModel(
                                     jsonObject.getInt("id"),
@@ -228,7 +217,7 @@ class PostProjectActivity : AppCompatActivity() {
                 is ApiCallback.Loading -> {
                     if (!response.isLoading) {
                         progressDialog.dismiss()
-                        System.out.println("COUNTRY Loading false ")
+                        println("COUNTRY Loading false ")
                     }
                 }
             }

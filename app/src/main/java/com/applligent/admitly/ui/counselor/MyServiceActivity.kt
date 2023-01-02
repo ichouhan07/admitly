@@ -17,7 +17,6 @@ import com.applligent.admitly.network.ApiCallback
 import com.applligent.admitly.network.ApiClient
 import com.applligent.admitly.network.ApiInterface
 import com.applligent.admitly.ui.comman.Repository
-import com.applligent.admitly.ui.student.StudentDashboardActivity
 import com.applligent.admitly.utils.Comman
 import com.applligent.admitly.utils.log
 import com.applligent.admitly.utils.preferences.getToken
@@ -115,7 +114,7 @@ class MyServiceActivity : AppCompatActivity() {
             }
 
         binding.finishBtn.setOnClickListener {
-            if (isValidServiceDetails() == true){
+            if (isValidServiceDetails()){
                 addService()
             }
         }
@@ -242,7 +241,7 @@ class MyServiceActivity : AppCompatActivity() {
                     val mainObject = JSONObject(res)
                     if (mainObject.getBoolean("success")) {
                         try {
-                            val jsonArray = mainObject.getJSONArray("data");
+                            val jsonArray = mainObject.getJSONArray("data")
                             serviceList.clear()
                             for (i in 0..jsonArray.length() - 1) {
                                 val jsonObject = jsonArray.getJSONObject(i)
@@ -270,7 +269,7 @@ class MyServiceActivity : AppCompatActivity() {
                 is ApiCallback.Loading -> {
                     if (!response.isLoading) {
                         progressDialog.dismiss()
-                        System.out.println("COUNTRY Loading false ")
+                        println("COUNTRY Loading false ")
                     }
                 }
             }
